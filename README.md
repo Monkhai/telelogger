@@ -89,7 +89,7 @@ const logger = new TelegramLogger({
   infoFormatter: message => `ℹ️ <b>INFO:</b>\n${message}`,
   errorFormatter: message => `❌ <b>ERROR:</b>\n${message}`,
   successFormatter: message => `✅ <b>SUCCESS:</b>\n${message}`,
-  warnFormatter: message => `⚠️ <b>WARNING:</b>\n${message}`,
+  warnFormatter: message => `🚨️ <b>WARNING:</b>\n${message}`,
 })
 ```
 

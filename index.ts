@@ -104,10 +104,10 @@ export class TelegramLogger {
    * await logger.logError(new Error('Database connection failed'));
    * ```
    */
-  public async logError(error: Error | string, parse_mode?: TelegramParseMode): Promise<void> {
+  public async logError(error: Error | string): Promise<void> {
     const errorMessage = error instanceof Error ? error.message : error
     const formattedMessage = this.errorFormatter(errorMessage)
-    await this.log(formattedMessage, parse_mode)
+    await this.log(formattedMessage)
   }
 
   /**
@@ -119,9 +119,9 @@ export class TelegramLogger {
    * await logger.logInfo('User logged in successfully');
    * ```
    */
-  public async logInfo(message: string, parse_mode?: TelegramParseMode): Promise<void> {
+  public async logInfo(message: string): Promise<void> {
     const formattedMessage = this.infoFormatter(message)
-    await this.log(formattedMessage, parse_mode)
+    await this.log(formattedMessage)
   }
 
   /**
@@ -133,9 +133,9 @@ export class TelegramLogger {
    * await logger.logSuccess('Backup completed successfully');
    * ```
    */
-  public async logSuccess(message: string, parse_mode?: TelegramParseMode): Promise<void> {
+  public async logSuccess(message: string): Promise<void> {
     const formattedMessage = this.successFormatter(message)
-    await this.log(formattedMessage, parse_mode)
+    await this.log(formattedMessage)
   }
 
   /**
@@ -147,8 +147,8 @@ export class TelegramLogger {
    * await logger.logWarn('Low disk space');
    * ```
    */
-  public async logWarn(message: string, parse_mode?: TelegramParseMode): Promise<void> {
+  public async logWarn(message: string): Promise<void> {
     const formattedMessage = this.warnFormatter(message)
-    await this.log(formattedMessage, parse_mode)
+    await this.log(formattedMessage)
   }
 }
