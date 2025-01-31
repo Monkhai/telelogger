@@ -57,6 +57,9 @@ export interface TelegramLoggerConfig {
   /** Target Chat ID where messages will be sent */
   chatId: number
 
+  /** The formatting of the message. */
+  parse_mode?: 'HTML' | 'Markdown' | 'MarkdownV2'
+
   /** Custom formatter for info messages */
   infoFormatter?: (message: string) => string
 
@@ -71,18 +74,22 @@ export interface TelegramLoggerConfig {
 }
 ```
 
-### Custom Formatters
+### Custom Formatters Example
 
 You can customize how messages are formatted before they're sent to Telegram:
+notice the `<b>` tags in the formatters, adding bold text to the titles.
+This allows you to add more information to the messages, such as links, bold text, etc.
+for more information on the different parse modes, see the [Telegram API documentation](https://core.telegram.org/bots/api#formatting-options).
 
 ```ts
 const logger = new TelegramLogger({
   botToken: 'YOUR_BOT_TOKEN',
   chatId: 'YOUR_CHAT_ID',
-  infoFormatter: message => `ℹ️ INFO: ${message}`,
-  errorFormatter: message => `❌ ERROR: ${message}`,
-  successFormatter: message => `✅ SUCCESS: ${message}`,
-  warnFormatter: message => `⚠️ WARNING: ${message}`,
+  parse_mode: 'HTML', // allows us to add <b> tags and more
+  infoFormatter: message => `ℹ️ <b>INFO:</b>\n${message}`,
+  errorFormatter: message => `❌ <b>ERROR:</b>\n${message}`,
+  successFormatter: message => `✅ <b>SUCCESS:</b>\n${message}`,
+  warnFormatter: message => `⚠️ <b>WARNING:</b>\n${message}`,
 })
 ```
 

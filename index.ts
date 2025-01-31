@@ -14,6 +14,7 @@ function baseWarnFormat(message: string) {
   return `🚨 Warning:\n${message}`
 }
 
+export type TelegramParseMode = 'HTML' | 'Markdown' | 'MarkdownV2'
 /**
  * TelegramLogger options interface for configuring the logger instance
  */
@@ -26,7 +27,7 @@ export interface TelegramLoggerConfig {
    * The formatting of the message.
    * @default undefined
    */
-  parse_mode?: 'HTML' | 'Markdown'
+  parse_mode?: TelegramParseMode
   /** Custom formatter for info messages. If not provided, uses default format */
   infoFormatter?: (message: string) => string
   /** Custom formatter for error messages. If not provided, uses default format */
@@ -53,7 +54,7 @@ export interface TelegramLoggerConfig {
 export class TelegramLogger {
   private readonly chatId: number
   private readonly baseUrl: string
-  private readonly parse_mode: undefined | 'HTML' | 'Markdown'
+  private readonly parse_mode: undefined | TelegramParseMode
   private readonly infoFormatter: (message: string) => string
   private readonly errorFormatter: (message: string) => string
   private readonly successFormatter: (message: string) => string
@@ -74,7 +75,7 @@ export class TelegramLogger {
    * @param message - The message to send
    * @param parse_mode - Optional formatting mode for messages. Can be 'HTML' or 'Markdown'. If not provided, uses the default formatting
    */
-  public async log(message: string, parse_mode?: 'HTML' | 'Markdown'): Promise<void> {
+  public async log(message: string, parse_mode?: TelegramParseMode): Promise<void> {
     try {
       await fetch(`${this.baseUrl}/sendMessage`, {
         method: 'POST',
@@ -103,7 +104,7 @@ export class TelegramLogger {
    * await logger.logError(new Error('Database connection failed'));
    * ```
    */
-  public async logError(error: Error | string, parse_mode?: 'HTML' | 'Markdown'): Promise<void> {
+  public async logError(error: Error | string, parse_mode?: TelegramParseMode): Promise<void> {
     const errorMessage = error instanceof Error ? error.message : error
     const formattedMessage = this.errorFormatter(errorMessage)
     await this.log(formattedMessage, parse_mode)
@@ -118,7 +119,7 @@ export class TelegramLogger {
    * await logger.logInfo('User logged in successfully');
    * ```
    */
-  public async logInfo(message: string, parse_mode?: 'HTML' | 'Markdown'): Promise<void> {
+  public async logInfo(message: string, parse_mode?: TelegramParseMode): Promise<void> {
     const formattedMessage = this.infoFormatter(message)
     await this.log(formattedMessage, parse_mode)
   }
@@ -132,7 +133,7 @@ export class TelegramLogger {
    * await logger.logSuccess('Backup completed successfully');
    * ```
    */
-  public async logSuccess(message: string, parse_mode?: 'HTML' | 'Markdown'): Promise<void> {
+  public async logSuccess(message: string, parse_mode?: TelegramParseMode): Promise<void> {
     const formattedMessage = this.successFormatter(message)
     await this.log(formattedMessage, parse_mode)
   }
@@ -146,7 +147,7 @@ export class TelegramLogger {
    * await logger.logWarn('Low disk space');
    * ```
    */
-  public async logWarn(message: string, parse_mode?: 'HTML' | 'Markdown'): Promise<void> {
+  public async logWarn(message: string, parse_mode?: TelegramParseMode): Promise<void> {
     const formattedMessage = this.warnFormatter(message)
     await this.log(formattedMessage, parse_mode)
   }
