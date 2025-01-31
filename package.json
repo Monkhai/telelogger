@@ -1,11 +1,11 @@
 {
   "name": "@monkhai/telelogger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Telegram-based logging utility for Node.js applications",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -39,5 +39,12 @@
   "bugs": {
     "url": "https://github.com/monkhai/telelogger/issues"
   },
-  "homepage": "https://github.com/monkhai/telelogger#readme"
+  "homepage": "https://github.com/monkhai/telelogger#readme",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  }
 }
