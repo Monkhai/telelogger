@@ -1,11 +1,43 @@
 {
   "name": "@monkhai/telelogger",
-  "module": "index.ts",
+  "version": "1.0.0",
+  "description": "A Telegram-based logging utility for Node.js applications",
   "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup index.ts --format cjs,esm --dts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "telegram",
+    "logger",
+    "logging",
+    "notifications"
+  ],
+  "author": "Monkhai",
+  "license": "MIT",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "tsup": "^8.3.6",
+    "typescript": "^5.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monkhai/telelogger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/monkhai/telelogger/issues"
+  },
+  "homepage": "https://github.com/monkhai/telelogger#readme"
 }
