@@ -1,6 +1,6 @@
 {
   "name": "@monkhai/telelogger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Telegram-based logging utility for Node.js applications",
   "type": "module",
   "main": "dist/index.js",

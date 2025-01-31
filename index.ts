@@ -76,6 +76,7 @@ export class TelegramLogger {
         body: JSON.stringify({
           chat_id: this.chatId,
           text: message,
+          parse_mode: 'HTML',
         }),
       })
     } catch (error) {

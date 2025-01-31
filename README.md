@@ -35,7 +35,7 @@ import { TelegramLogger } from '@monkhai/telelogger'
 
 const logger = new TelegramLogger({
   botToken: 'YOUR_BOT_TOKEN',
-  chatId: 'YOUR_CHAT_ID',
+  chatId: YOUR_CHAT_ID,
 })
 
 // Basic logging
